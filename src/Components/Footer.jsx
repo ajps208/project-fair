@@ -7,14 +7,13 @@ function Footer() {
     <>
      <div
       className="d-flex  flex-column justify-content-center align-items-center "
-      style={{ width: "100%", height: "300px" }}
+      style={{ width: "100%", height: "300px",backgroundColor:"#90ee90" }}
     >
       <div className="footer-content d-flex justify-content-evenly w-100 flex-wrap">
         <div style={{ width: "400px" }} className="website">
           <h4>
-           
-            <i class="fa-solid fa-truck me-2"></i>
-          E-Cart
+          <i class="fa-solid fa-laptop-file"></i>  &nbsp;
+             Project-Fair
           </h4>
           <h6>
             Designed and built with all the love in the world by the Bootstrap
@@ -60,7 +59,7 @@ function Footer() {
               placeholder="Enter Your Mail"
               type="text"
             />
-            <div className="btn btn-primary ms-3">Subscribe</div>
+            <div className="btn btn-primary ms-3 w-50">Subscribe</div>
           </div>
           <div className="d-flex justify-content-evenly mt-3 fs-5">
             <Link
@@ -96,7 +95,7 @@ function Footer() {
       </div>
       <br />
       <br />
-      <p>Copyright © 2023 E-Cart. Built with React.</p>
+      <p>Copyright © 2023 Project-Fair. Built with React.</p>
     </div>
     </>
   )
