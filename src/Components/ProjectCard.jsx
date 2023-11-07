@@ -11,7 +11,7 @@ function ProjectCard() {
     <Card className='shadow mb-5 btn' onClick={handleShow}>
       <Card.Img variant="top" src={project1} />
       <Card.Body>
-        <Card.Title>Media Player</Card.Title>
+        <Card.Title className='fw-bolder'>Media Player</Card.Title>
       </Card.Body>
     </Card>
     <Modal size='lg' show={show} onHide={handleClose} animation={false}>

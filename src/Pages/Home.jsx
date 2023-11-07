@@ -14,7 +14,7 @@ function Home() {
         <i class="fa-solid fa-laptop-file"></i>   Project-Fair
         </h1>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam est accusamus nemo nobis, unde exercitationem, optio maiores eligendi natus similique delectus, temporibus at excepturi libero officiis consequuntur voluptas fugiat repellat.</p>
-        <button className="btn btn-warning">Start to Explore <i className='fa-solid fa-right-long fa-beat ms-2'></i></button>
+        <Link to={'/login'} className="btn btn-warning">Start to Explore <i className='fa-solid fa-right-long fa-beat ms-2'></i></Link>
           
       </Col>
       <Col sm={12} md={6}>
@@ -33,16 +33,7 @@ function Home() {
               <ProjectCard/>
               </div>
           </Col>
-          <Col sm={12} md={6} lg={4}>
-              <div style={{width:"500px"}}>
-              <ProjectCard/>
-              </div>
-          </Col>
-          <Col sm={12} md={6} lg={4}>
-              <div style={{width:"500px"}}>
-              <ProjectCard/>
-              </div>
-          </Col>
+         
         </Row>
       </marquee>
       <div className="text-center mt-5">
