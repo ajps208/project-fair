@@ -1,10 +1,36 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Await, Link, useNavigate } from 'react-router-dom'
 import logimg from '../Assets/loginimg.png'
 import { Form } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { registerAPI } from '../services/allAPI';
 
 function Auth({ register }) {
+  const navigate=useNavigate()
+  const[userData,setUserData]=useState({
+    username:"",email:"",password:""
+  })
   const isRegisterForm = register ? true : false
+  const handleRegister=async(e)=>{
+    e.preventDefault()
+    const{username,email,password}=userData
+    if(!username || !email || !password){
+      toast.info("Please fill the form completely!!!")
+    }else{
+      const result=await registerAPI(userData)
+      if(result.status===200){
+        toast.success(`${result.data.username} has registered successfully!!!`)
+        setUserData({
+          username:"",email:"",password:""
+        })
+        navigate('/login')
+      }else{
+        toast.warning(result.response.data)
+      }
+    }
+
+  }
   return (
     <div style={{ width: "100%", height: "100vh" }} className='d-flex align-items-center justify-content-center'>
       <div className='w-75 container'>
@@ -29,23 +55,23 @@ function Auth({ register }) {
                     <>
                       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                      
-                        <Form.Control type="email" placeholder="UserName" />
+                        <Form.Control type="text" placeholder="UserName" value={userData.username} onChange={e=>setUserData({...userData,username:e.target.value})} />
                       </Form.Group>
                     
                     </>
                   )}
                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                      
-                     <Form.Control type="email" placeholder="Enter Email Id" />
+                     <Form.Control type="email" placeholder="Enter Email Id"  value={userData.email} onChange={e=>setUserData({...userData,email:e.target.value})}/>
                    </Form.Group>
                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                      
-                     <Form.Control type="email" placeholder="Enter Password" />
+                     <Form.Control type="password" placeholder="Enter Password" value={userData.password} onChange={e=>setUserData({...userData,password:e.target.value})} />
                    </Form.Group>
                    {
                     isRegisterForm?
                     <div>
-                        <button className='btn btn-light mb-2'>Register</button>
+                        <button onClick={handleRegister} className='btn btn-light mb-2'>Register</button>
                         <p>Already have account?clicked here to <Link to={'/login'}>Login</Link></p>
                     </div>:
                      <div>
@@ -59,6 +85,7 @@ function Auth({ register }) {
           </div>
         </div>
       </div>
+      <ToastContainer position='top-right' autoClose={2000} theme='colored' />
     </div>
   )
 }
