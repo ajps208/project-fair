@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row,Col } from 'react-bootstrap'
 import title from'../Assets/title.png'
 import ProjectCard from '../Components/ProjectCard'
 import { Link } from 'react-router-dom'
 function Home() {
+  const[loggedin,setLoggedin]=useState(false)
+  useEffect(()=>{
+  if(sessionStorage.getItem("token")){
+    setLoggedin(true)
+  }else{
+    setLoggedin(false)
+  }
+  },[])
   return (
     <>
     {/*langing page */}
@@ -14,7 +22,8 @@ function Home() {
         <i class="fa-solid fa-laptop-file"></i>   Project-Fair
         </h1>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam est accusamus nemo nobis, unde exercitationem, optio maiores eligendi natus similique delectus, temporibus at excepturi libero officiis consequuntur voluptas fugiat repellat.</p>
-        <Link to={'/login'} className="btn btn-warning">Start to Explore <i className='fa-solid fa-right-long fa-beat ms-2'></i></Link>
+        {!loggedin?<Link to={'/login'} className="btn btn-warning">Start to Explore <i className='fa-solid fa-right-long fa-beat ms-2'></i></Link>:
+        <Link to={'/dashboard'} className="btn btn-warning">Manage your Projects <i className='fa-solid fa-right-long fa-beat ms-2'></i></Link>}
           
       </Col>
       <Col sm={12} md={6}>
