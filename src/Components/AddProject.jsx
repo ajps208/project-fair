@@ -39,7 +39,7 @@ function AddProject() {
       e.preventDefault()
       const{title,languages,overview,github,website,projectImage}=projectDetails
       if(!title||!languages||!overview||!github||!website||!projectImage){
-        toast.info("Please fill thr form completely!!!")
+        toast.info("Please fill the form completely!!!")
       }else{
         const reqBody=new FormData()
         reqBody.append("title",title)

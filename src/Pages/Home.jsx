@@ -3,15 +3,30 @@ import { Row,Col } from 'react-bootstrap'
 import title from'../Assets/title.png'
 import ProjectCard from '../Components/ProjectCard'
 import { Link } from 'react-router-dom'
+import { homeProjectApi } from '../services/allAPI'
 function Home() {
   const[loggedin,setLoggedin]=useState(false)
+  const [homeprojects,setHomeprojects]=useState([])
+  const getHomeProjects=async()=>{
+    const result=await homeProjectApi()
+    if(result.status===200){
+      setHomeprojects(result.data)
+    }else{
+      console.log(result);
+      console.log(result.response.data);
+    }
+  }
+  // console.log(homeprojects);
   useEffect(()=>{
   if(sessionStorage.getItem("token")){
     setLoggedin(true)
   }else{
     setLoggedin(false)
   }
+  // /apicall
+  getHomeProjects()
   },[])
+  
   return (
     <>
     {/*langing page */}
@@ -37,11 +52,11 @@ function Home() {
       <h1 className="text-center">Explore our Projects</h1>
       <marquee scrollAmount={15}>
         <Row className='mt-3'>
-          <Col sm={12} md={6} lg={4}>
+         { homeprojects?.length>0?homeprojects.map(project=>(<Col sm={12} md={6} lg={4}>
               <div style={{width:"500px"}}>
-              <ProjectCard/>
+              <ProjectCard project={project}/>
               </div>
-          </Col>
+          </Col>)):null}
          
         </Row>
       </marquee>
