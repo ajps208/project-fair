@@ -5,6 +5,7 @@ import ProjectCard from "../Components/ProjectCard";
 import { allProjectsApi } from "../services/allAPI";
 
 function Projects() {
+  const[searchKey,setSearchKey]=useState("")
 const [allProjects,setAllProjects]=useState([])
 const getAllProjects=async()=>{
   if(sessionStorage.getItem("token")){
@@ -13,7 +14,7 @@ const getAllProjects=async()=>{
       "Content-Type":"application/json",
       "Authorization":`Bearer ${token}`
     }
-    const result=await allProjectsApi(reqHeader)
+    const result=await allProjectsApi(searchKey,reqHeader)
     if(result.status===200){
       setAllProjects(result.data)
     }else{
@@ -23,7 +24,7 @@ const getAllProjects=async()=>{
 }
 useEffect(() => {
   getAllProjects()
-}, [])
+}, [searchKey])
 
   return (
     <>
@@ -32,7 +33,7 @@ useEffect(() => {
         <h2 className="text-center mb-5">All Projects</h2>
         <div className="d-flex justify-content-center align-items-center w-100">
           <div style={{position:"relative"}} className="d-flex border w-50 rounded">
-            <input className="form-control" placeholder="Search project by technology used" type="text" />
+            <input className="form-control" placeholder="Search project by technology used" type="text" value={searchKey} onChange={e=>setSearchKey(e.target.value)} />
             <i style={{position:"absolute",right:"10px"}} className="mt-2 fa-solid fa-magnifying-glass "></i>
           </div>
         </div>
