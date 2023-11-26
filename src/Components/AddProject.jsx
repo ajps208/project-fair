@@ -8,8 +8,8 @@ import { addProjectApi } from '../services/allAPI';
 import { addProjectResponsContext } from '../Context.js/ContextShare';
 
 function AddProject() {
-  const[addProjectResponse,setAddProjectResponse]=useContext(addProjectResponsContext)
-    const [show, setShow] = useState(false);
+  const { addProjectResponse, setAddProjectResponse } = useContext(addProjectResponsContext);
+  const [show, setShow] = useState(false);
     const[projectDetails,setProjectDetails]=useState({
       title:"",languages:"",overview:"",github:"",website:"",projectImage:""
     })
@@ -60,8 +60,9 @@ function AddProject() {
         console.log(result);
         if(result.status===200){
           console.log(result.data);
+          setAddProjectResponse(result.data)
           handleClose()
-         setAddProjectResponse(result.data)
+          
         }else{
           console.log(result);
           console.log(result.response.data);
