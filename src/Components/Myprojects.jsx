@@ -33,6 +33,8 @@ function Myprojects() {
   useEffect(() => {
     getUserProjects();
   }, [addProjectResponse,editProjectResponse]);
+
+
   const handleDelete=async(id)=>{
     const token=sessionStorage.getItem("token")
     const reqHeader={
@@ -46,6 +48,7 @@ function Myprojects() {
       toast.error(result.response.data)
     }
   }
+  
   return (
     <div className="card shadow p-3 mt-3">
       <div className="d-flex">
