@@ -19,6 +19,8 @@ function App() {
         <Route path='/register' element={<Auth register/>}/>
         <Route path='/dashboard' element={isAuthorizes?<Dashboard />:<Home/>}/>
         <Route path='/projects' element={isAuthorizes?<Projects/>:<Home/>}/>
+        <Route path='/*' element={<Home/>}/>
+
       </Routes>
       <Footer/>
     </>
